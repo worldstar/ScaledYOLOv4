@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 10 14:26:56 2022
+
+@author: KevinGG
+"""
+
+import os
+
+test_path = r"C:\Users\darks\Desktop\ScaledYOLOv4\test\labels"
+wr_test_path = r"C:\Users\darks\Desktop\ScaledYOLOv4\test\labels"
+
+test_list = os.listdir(test_path)
+# experiment_
+
+for file in test_list:
+    s_file = os.path.join(test_path, file)
+    wr_file = os.path.join(wr_test_path, file)
+    print(s_file)
+    print(wr_file)
+    
+    items_list = []
+    
+    if os.path.isfile(s_file):
+        fr = open(s_file, "r")
+        a = fr.readlines()
+        fw = open(wr_file, "w+")
+        
+        
+        for i in a:
+            s_list = i.split(' ')
+            if s_list[0] == '0' or s_list[0] == '1':
+                print("i = ",i)
+                fw.write(i + '\n')
+                
+                
+            elif s_list[0] == '4' or s_list[0] == '5':
+                s_list[0] = str(int(s_list[0])-2) 
+                s = ' '.join(str(e) for e in s_list)
+                print("s = ",s)
+                fw.write(s + '\n')
+
+        fr.close()
+        fw.close()
+
+
+#%%
+import os
+import glob
+
+experiment_path = r"D:\ScaledYOLOv4\experiment-8items\**\absolute\**\*.txt"
+wr_experiment_path = r"D:\ScaledYOLOv4\experiment-4items\**\absolute\**\*.txt"
+
+a = glob.glob(experiment_path)
+b = glob.glob(wr_experiment_path)
+
+for i,j in zip(a,b):
+    if os.path.isfile(i):
+        fr = open(i, "r")
+        a = fr.readlines()
+        fw = open(j, "w+")
+        
+        
+        for k in a:
+            s_list = k.split(' ')
+            if s_list[0] == '0' or s_list[0] == '1':
+                print("k = ",k)
+                fw.write(k + '\n')
+                
+                
+            elif s_list[0] == '4' or s_list[0] == '5':
+                s_list[0] = str(int(s_list[0])-2) 
+                s = ' '.join(str(e) for e in s_list)
+                print("s = ",s)
+                fw.write(s + '\n')
+
+        fr.close()
+        fw.close()
+                    
+        
+
